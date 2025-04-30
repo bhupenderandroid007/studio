@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { useFormState } from "react-dom";
+import { useEffect, useRef, useActionState } from "react"; // Import useActionState from react
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -16,13 +15,16 @@ import { CircleCheck, CircleAlert } from "lucide-react";
 const initialState: FormState = { message: '', type: 'idle' };
 
 export function JobForm() {
-  const [state, formAction] = useFormState(addJob, initialState);
+  // Use useActionState instead of useFormState
+  const [state, formAction] = useActionState(addJob, initialState);
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
   const submitButtonRef = useRef<HTMLButtonElement>(null); // Ref for submit button
 
-  // Track submitting state
+  // Track submitting state - This approach using getAttribute might not be reliable
+  // with React's rendering cycle. A better approach might be needed if issues arise.
   const isSubmitting = submitButtonRef.current?.getAttribute("data-pending") === "true";
+
 
   useEffect(() => {
     if (state.type === 'success') {
@@ -81,12 +83,25 @@ export function JobForm() {
           </div>
         </CardContent>
         <CardFooter>
-           <Button type="submit" ref={submitButtonRef} disabled={isSubmitting} aria-disabled={isSubmitting}>
-              {isSubmitting ? <LoadingSpinner size={16} className="mr-2"/> : null}
-              {isSubmitting ? "Adding Job..." : "Add Job"}
-            </Button>
+           {/* Using formStatus to determine pending state */}
+           <SubmitButton />
         </CardFooter>
       </form>
     </Card>
   );
 }
+
+// Separate component to use useFormStatus
+function SubmitButton() {
+    const { pending } = useFormStatus();
+
+    return (
+        <Button type="submit" disabled={pending} aria-disabled={pending}>
+            {pending ? <LoadingSpinner size={16} className="mr-2"/> : null}
+            {pending ? "Adding Job..." : "Add Job"}
+        </Button>
+    );
+}
+
+// Import useFormStatus from react-dom
+import { useFormStatus } from 'react-dom';
