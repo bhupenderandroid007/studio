@@ -26,8 +26,8 @@ export default function RootLayout({
 }>) {
   // Ensure no whitespace exists between <html> and <body> tags
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} antialiased`}>
+    <html lang="en">
+      <body className={`${geistSans.variable} antialiased`} suppressHydrationWarning> {/* Add suppressHydrationWarning here */}
         {children}
         <Toaster /> {/* Add Toaster here */}
       </body>
