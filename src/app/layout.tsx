@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning> {/* Add suppressHydrationWarning here */}
-      <body className={`${geistSans.variable} antialiased`} suppressHydrationWarning> {/* Also add suppressHydrationWarning here for safety */}
+      <body className={`${geistSans.variable} antialiased`}> {/* Remove suppressHydrationWarning from body */}
         {children}
         <Toaster /> {/* Add Toaster here */}
       </body>
