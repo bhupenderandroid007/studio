@@ -1,5 +1,5 @@
 # Firebase Studio
 
-This is a NextJS starter in Firebase Studio.
+This is a NextJS Synapse (SRN) – 1-Hour Full-Stack Engineer Technical Challenge.
 
 To get started, take a look at src/app/page.tsx.
