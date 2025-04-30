@@ -1,4 +1,4 @@
-# Firebase Studio
+# Technical Challenge
 
 This is a NextJS Synapse (SRN) – 1-Hour Full-Stack Engineer Technical Challenge.
 
