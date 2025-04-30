@@ -24,12 +24,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Ensure no whitespace exists between <html> and <body> tags
   return (
-    <html lang="en" suppressHydrationWarning> {/* Add suppressHydrationWarning here */}
-      <body className={`${geistSans.variable} antialiased`}> {/* Remove suppressHydrationWarning from body */}
+    <html lang="en" suppressHydrationWarning><body className={`${geistSans.variable} antialiased`}>
         {children}
         <Toaster /> {/* Add Toaster here */}
-      </body>
-    </html>
+      </body></html>
   );
 }
